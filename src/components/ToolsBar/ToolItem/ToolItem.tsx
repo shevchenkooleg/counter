@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from "../../ButtonsBar/Button/Button";
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import IconButton from '@mui/material/IconButton';

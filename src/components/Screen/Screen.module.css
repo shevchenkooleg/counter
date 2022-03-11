@@ -1,7 +1,11 @@
 .screen {
-    margin: 10px;
+    margin: 10px 0 0 0;
     font-size: 46px;
     font-family: sans-serif;
     font-weight: bold;
     color: #3100ff;
+}
+
+.red {
+    color:red;
 }
