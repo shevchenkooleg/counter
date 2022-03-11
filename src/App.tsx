@@ -1,3 +1,4 @@
+import Button from '@mui/material/Button/Button';
 import React, {useState} from 'react';
 import './App.css';
 import ButtonsBar from './components/ButtonsBar/ButtonsBar';
@@ -10,7 +11,8 @@ function App() {
   let [stopValue, setStopValue] = useState(5)
   let [stepValue, setStepValue] = useState(1)
   let [counter, setCounter] = useState(startValue)
-  let [toolsRender, setToolsRender] = useState(true)
+  let [toolsRender, setToolsRender] = useState(false)
+  let [display, setDisplay] = useState(false)
 
   const values = {startValue, stopValue, stepValue}
 
@@ -36,18 +38,22 @@ function App() {
   }
   const toolsBarRenderHandler = () => {
     setToolsRender(!toolsRender)
+    setTimeout(()=>setDisplay(!display),450)
   }
 
 
   return (
-    <div className="App">
-      {toolsRender && <ToolsBar values={values} changeValueCallback={changeValueCallback}/>}
+    <div className={!toolsRender ? "App" : 'App AppToolsEnabled'}>
+
       <Screen counter={counter}/>
       <ButtonsBar counterChangeCallback={counterChangeCallback}
                   buttonsBlockCallback={buttonsBlockCallback}
                   toolsBarRenderHandler={toolsBarRenderHandler}/>
+      {toolsRender && display && <ToolsBar values={values} changeValueCallback={changeValueCallback}/>}
     </div>
   );
 }
+
+
 
 export default App;
