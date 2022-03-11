@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from "../ButtonsBar/Button/Button";
 import ToolItem from "./ToolItem/ToolItem";
 
 type SettingsPropsType = {
@@ -15,7 +14,8 @@ export const ToolsBar: React.FC<SettingsPropsType> = ({values, changeValueCallba
 
     // const settingsTools = ['start', 'stop', 'step']
 
-    const changeValue = (type: string, title: string) => {
+    const changeValueHandler = (type: string, title: string, newValue?:number) => {
+
         if (type === 'start') {
             title === 'up'
                 ? changeValueCallback('start', values.startValue + 1)
@@ -49,9 +49,9 @@ export const ToolsBar: React.FC<SettingsPropsType> = ({values, changeValueCallba
         //
         // </div>
         <div>
-            <ToolItem title={'start'} value={values.startValue} callBack={()=>{}}/>
-            <ToolItem title={'stop'} value={values.stopValue} callBack={()=>{}}/>
-            <ToolItem title={'step'} value={values.stepValue} callBack={()=>{}}/>
+            <ToolItem type={'start'} value={values.startValue} changeValueHandler={changeValueHandler}/>
+            <ToolItem type={'stop'} value={values.stopValue} changeValueHandler={changeValueHandler}/>
+            <ToolItem type={'step'} value={values.stepValue} changeValueHandler={changeValueHandler}/>
 
             {/*<div>*/}
             {/*    {'Start'}*/}

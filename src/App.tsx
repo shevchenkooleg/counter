@@ -26,12 +26,12 @@ function App() {
   const changeValueCallback = (title:string, newValue:number) => {
     if (title === 'start') {
       setStartValue(newValue)
+      setCounter(newValue)
     } else if (title === 'stop') {
       setStopValue(newValue)
     } else if (title === 'step') {
       setStepValue(newValue)
     }
-
   }
 
 

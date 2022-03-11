@@ -1,24 +1,27 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Button from "../../ButtonsBar/Button/Button";
 
 type ToolItemPropsType = {
-    title: string
+    type: string
     value: number
-    callBack: () => void
+    changeValueHandler: (type: string, title: string) => void
 }
 
-const ToolItem:React.FC<ToolItemPropsType> = ({title, value}) => {
+const ToolItem: React.FC<ToolItemPropsType> = ({type, value,changeValueHandler}) => {
 
-    let [state, setState] = useState(value)
+    const buttonCallbackHandler = (type:string, title:string) => {
+        changeValueHandler(type, title)
 
+        // console.log(type)
+        // console.log(title)
+    }
 
     return (
         <div>
-            {title}
-            <input value={state} onChange={(e) =>
-                setState(Number(e.currentTarget.value))}/>
-            <Button title={'up'} callBack={()=>{}}/>
-            <Button title={'down'} callBack={()=>{}}/>
+            {type}
+            <input value={value} />
+            <Button title={'up'} callBack={(title) => buttonCallbackHandler(type, title)}/>
+            <Button title={'down'} callBack={(title) => buttonCallbackHandler(type, title)}/>
         </div>
     );
 };
