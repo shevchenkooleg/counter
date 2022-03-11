@@ -6,14 +6,18 @@ type ButtonsBarPropsType = {
     buttonsBlockCallback: (title:string) => boolean
 }
 
-
 const ButtonsBar: React.FC<ButtonsBarPropsType> = (
     {counterChangeCallback, buttonsBlockCallback}
 ) => {
+
+    const disabledHandler = (title:string) => {
+        return buttonsBlockCallback(title)
+    }
+
     return(
         <div>
-            <Button title={'inc'} counterChangeCallback={counterChangeCallback} buttonsBlockCallback={buttonsBlockCallback}/>
-            <Button title={'reset'} counterChangeCallback={counterChangeCallback} buttonsBlockCallback={buttonsBlockCallback}/>
+            <Button title={'inc'} callBack={counterChangeCallback} disabled={disabledHandler('inc')}/>
+            <Button title={'reset'} callBack={counterChangeCallback} disabled={disabledHandler('reset')}/>
         </div>
 
     )

@@ -2,21 +2,21 @@ import React from 'react'
 
 type ButtonPropsType = {
     title: string
-    counterChangeCallback: (title:string) => void
-    buttonsBlockCallback: (title:string) => boolean
+    callBack: (title:string) => void
+    disabled?: boolean
 }
 
 const Button: React.FC<ButtonPropsType> = (
-    {title, counterChangeCallback, buttonsBlockCallback}
+    {title, callBack, disabled}
 ) => {
 
     const onClickHandler = () => {
-        counterChangeCallback(title)
+        callBack(title)
     }
 
 
     return (
-        <button onClick={onClickHandler} disabled={buttonsBlockCallback(title)}>{title}</button>
+        <button onClick={onClickHandler} disabled={disabled}>{title}</button>
     )
 }
 
