@@ -10,6 +10,7 @@ function App() {
   let [stopValue, setStopValue] = useState(5)
   let [stepValue, setStepValue] = useState(1)
   let [counter, setCounter] = useState(startValue)
+  let [toolsRender, setToolsRender] = useState(true)
 
   const values = {startValue, stopValue, stepValue}
 
@@ -33,13 +34,18 @@ function App() {
       setStepValue(newValue)
     }
   }
+  const toolsBarRenderHandler = () => {
+    setToolsRender(!toolsRender)
+  }
 
 
   return (
     <div className="App">
-      <ToolsBar values={values} changeValueCallback={changeValueCallback}/>
+      {toolsRender && <ToolsBar values={values} changeValueCallback={changeValueCallback}/>}
       <Screen counter={counter}/>
-      <ButtonsBar counterChangeCallback={counterChangeCallback} buttonsBlockCallback={buttonsBlockCallback}/>
+      <ButtonsBar counterChangeCallback={counterChangeCallback}
+                  buttonsBlockCallback={buttonsBlockCallback}
+                  toolsBarRenderHandler={toolsBarRenderHandler}/>
     </div>
   );
 }
