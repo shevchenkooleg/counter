@@ -1,12 +1,12 @@
 .App {
     display: grid;
     transition-duration: 0.5s;
-    grid-template-rows: 10fr 4fr 10fr 10fr;
-    grid-template:
-        'screen'
-        'error'
-        'buttonsBar'
-        'toolsBar';
+    grid-template-rows: 1fr 1fr 1fr;
+    /*grid-template:*/
+    /*    'screen'*/
+    /*    'error'*/
+    /*    'buttonsBar'*/
+    /*    'toolsBar';*/
     text-align: center;
     height: 120px;
     border: 2px solid dodgerblue;

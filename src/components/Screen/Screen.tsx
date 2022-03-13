@@ -19,7 +19,7 @@ const Screen: React.FC<ScreenPropsType> = (
         <>
             <div
                 className={finalClass}>{counter}
-                <span><button onClick={()=>setError(!error)}>set</button></span>
+                {/*<span><button onClick={()=>setError(!error)}>set</button></span>*/}
             </div>
 
         </>

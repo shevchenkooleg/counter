@@ -21,6 +21,7 @@ function App() {
     }, [])
     useEffect(() => {
         setToLocalStorage()
+        setCounter(startValue)
 
     }, [startValue, stopValue, stepValue])
 
@@ -78,7 +79,7 @@ function App() {
         <div className={!toolsRender ? "App" : 'App AppToolsEnabled'}>
 
             <Screen counter={counter} stopValue={stopValue} error={error} setError={setError}/>
-            {error && <ErrorMessage/>}
+            {/*{error && <ErrorMessage/>}*/}
             <ButtonsBar counterChangeCallback={counterChangeCallback}
                         buttonsBlockCallback={buttonsBlockCallback}
                         toolsBarRenderHandler={toolsBarRenderHandler}/>
