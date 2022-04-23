@@ -7,8 +7,12 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 
 function App() {
 
+    const getStartValueFromLS = () => {
+        const startValueLS = localStorage.getItem('counterStartValue')
+        return startValueLS ? Number(startValueLS) : 0
+    }
 
-    let [startValue, setStartValue] = useState(0)
+    let [startValue, setStartValue] = useState(getStartValueFromLS)
     let [stopValue, setStopValue] = useState(5)
     let [stepValue, setStepValue] = useState(1)
     let [counter, setCounter] = useState(startValue)
