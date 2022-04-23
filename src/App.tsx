@@ -3,7 +3,6 @@ import './App.css';
 import ButtonsBar from './components/ButtonsBar/ButtonsBar';
 import Screen from "./components/Screen/Screen";
 import {ToolsBar} from "./components/ToolsBar/ToolsBar";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 
 function App() {
 
