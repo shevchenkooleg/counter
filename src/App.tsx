@@ -1,60 +1,37 @@
 import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import './App.css';
 import ButtonsBar from './components/ButtonsBar/ButtonsBar';
 import Screen from "./components/Screen/Screen";
 import {ToolsBar} from "./components/ToolsBar/ToolsBar";
+import {AppStateType} from "./bll/store";
+import {
+    incCounter,
+    resetCounter,
+    setDisplay,
+    setStartValue,
+    setStepValue,
+    setStopValue,
+    setToolsRender
+} from "./bll/counter-reducer";
 
 function App() {
 
-    const getStartValueFromLS = () => {
-        const startValueLS = localStorage.getItem('counterStartValue')
-        return startValueLS ? Number(startValueLS) : 0
-    }
+    const counter = useSelector<AppStateType, number>(state => state.counter.counter)
+    const startValue = useSelector<AppStateType, number>(state => state.counter.startValue)
+    const stopValue = useSelector<AppStateType, number>(state => state.counter.stopValue)
+    const stepValue = useSelector<AppStateType, number>(state => state.counter.stepValue)
+    const toolsRender = useSelector<AppStateType, boolean>(state => state.counter.toolsRender)
+    const display = useSelector<AppStateType, boolean>(state => state.counter.display)
+    const error = useSelector<AppStateType, boolean>(state => state.counter.error)
 
-    let [startValue, setStartValue] = useState(getStartValueFromLS)
-    let [stopValue, setStopValue] = useState(5)
-    let [stepValue, setStepValue] = useState(1)
-    let [counter, setCounter] = useState(startValue)
-    let [toolsRender, setToolsRender] = useState(false)
-    let [display, setDisplay] = useState(false)
-    let [error, setError] = useState(false)
+    const dispatch = useDispatch()
 
-    useEffect(() => {
-        getFromLocalStorage()
-    }, [])
-    useEffect(() => {
-        setToLocalStorage()
-        setCounter(startValue)
-
-    }, [startValue, stopValue, stepValue])
-
-    const setToLocalStorage = () => {
-        localStorage.setItem('counterStartValue', JSON.stringify(startValue))
-        localStorage.setItem('counterStopValue', JSON.stringify(stopValue))
-        localStorage.setItem('counterStepValue', JSON.stringify(stepValue))
-    }
-
-    const getFromLocalStorage = () => {
-        let restoreStartValue = localStorage.getItem('counterStartValue')
-        if (restoreStartValue) {
-            setStartValue(JSON.parse(restoreStartValue))
-        }
-        let restoreStopValue = localStorage.getItem('counterStopValue')
-        if (restoreStopValue) {
-            setStopValue(JSON.parse(restoreStopValue))
-        }
-        let restoreStepValue = localStorage.getItem('counterStepValue')
-        if (restoreStepValue) {
-            setStepValue(JSON.parse(restoreStepValue))
-        }
-
-    }
-
-    const values = {startValue, stopValue, stepValue}
+    const values = {startValue, stopValue, stepValue}       //упаковка параметров для упрощенной передачи в props
 
     const counterChangeCallback = (title: string) => {
-        title === 'inc' && counter < stopValue && setCounter(counter + stepValue)
-        title === 'reset' && counter !== startValue && setCounter(startValue)
+        title === 'inc' && counter < stopValue && dispatch(incCounter(counter, stepValue))
+        title === 'reset' && counter !== startValue && dispatch(resetCounter(startValue))
     }
     const buttonsBlockCallback = (title: string) => {
         if (title === 'inc' && counter < stopValue || title === 'reset' && counter !== startValue) {
@@ -64,24 +41,24 @@ function App() {
     }
     const changeValueCallback = (title: string, newValue: number) => {
         if (title === 'start' && newValue >= 0 && newValue < stopValue) {
-            setStartValue(newValue)
-            setCounter(newValue)
+            dispatch(setStartValue(newValue))
+            dispatch(resetCounter(newValue))
         } else if (title === 'stop' && newValue > startValue) {
-            setStopValue(newValue)
+            dispatch(setStopValue(newValue))
         } else if (title === 'step' && newValue > 0) {
-            setStepValue(newValue)
+            dispatch(setStepValue(newValue))
         }
     }
     const toolsBarRenderHandler = () => {
-        setToolsRender(!toolsRender)
-        setTimeout(() => setDisplay(!display), 450)
+        dispatch(setToolsRender(!toolsRender))
+        setTimeout(() => dispatch(setDisplay(!display)), 450)
     }
-
 
     return (
         <div className={!toolsRender ? "App" : 'App AppToolsEnabled'}>
 
-            <Screen counter={counter} stopValue={stopValue} error={error} setError={setError}/>
+            {/*<Screen counter={counter} stopValue={stopValue} error={error} setError={setError}/>*/}
+            <Screen counter={counter} stopValue={stopValue} error={error}/>
             {/*{error && <ErrorMessage/>}*/}
             <ButtonsBar counterChangeCallback={counterChangeCallback}
                         buttonsBlockCallback={buttonsBlockCallback}

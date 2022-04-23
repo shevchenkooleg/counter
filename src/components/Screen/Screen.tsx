@@ -1,12 +1,11 @@
 import React from 'react'
 import s from './Screen.module.css'
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 type ScreenPropsType = {
     counter: number
     stopValue: number
     error: boolean
-    setError: (error:boolean)=>void
+    setError?: (error:boolean)=>void
 }
 
 const Screen: React.FC<ScreenPropsType> = (
