@@ -1,7 +1,6 @@
 import MuiButton from '@mui/material/Button'
 import React from 'react'
 import s from './ButtonsBar.module.css'
-import Button from './Button/Button'
 
 type ButtonsBarPropsType = {
     counterChangeCallback: (title: string) => void
